@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const todoSchema = mongoose.Schema({
   title: {
     type: String,
-    requerd: true,
+    required: true,
   },
   desc: {
     type: String,
-    requerd: true,
+    required: true,
   },
   status: {
     type: Boolean,
-    requerd: true,
+    required: true,
     default: false,
   },
 });

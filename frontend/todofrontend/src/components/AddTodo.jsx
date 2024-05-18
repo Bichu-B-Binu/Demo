@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import Form from "react-bootstrap/Form";
@@ -5,16 +6,47 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 // import { useState } from "react";
 
-export const AddTodo = ({ todo, setTodo, todos, setTodos }) => {
+export const AddTodo = ({
+  todo,
+  setTodo,
+  todos,
+  setTodos,
+  getTodo,
+  setTask,
+  task,
+}) => {
+  // console.log(axios.toFormData(task, todo));
   const handleAdd = async () => {
-    setTodos([...todos, todo]);
-
+    // if (task._id) {
+    //   await axios.post("/api/todo", {
+    //     // _id:task._id,
+    //     // title: task.title,
+    //     // desc: task.desc,
+    //   });
+    // getTodo();
+    // setTodo({
+    //   title: "",
+    //   desc: "",
+    // });
+    // const edits = await todos.map((todo) =>
+    // todo._id===task.id?{title:task._id}
+    // console.log(todo._id)
+    // );
+    // console.log(edits);
+    // getTodo();
+    // } else {
     await axios.post("/api/todo", {
       title: todo.title,
       desc: todo.desc,
     });
+    getTodo();
+    setTodo({
+      title: "",
+      desc: "",
+    });
+    // }
   };
-  // console.log(todo);
+  // console.log(task);
   return (
     <>
       <div className="container mt-5 bg-color rounded-4 p-4">
@@ -50,7 +82,7 @@ export const AddTodo = ({ todo, setTodo, todos, setTodos }) => {
           </Form.Group>
         </Form>
         <div className="d-flex justify-content-end">
-          <Button variant="info" size="lg" onClick={() => handleAdd()}>
+          <Button variant="info" size="lg" onClick={handleAdd}>
             Add To Do
           </Button>
         </div>

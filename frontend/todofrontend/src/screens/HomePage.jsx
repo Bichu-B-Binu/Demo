@@ -12,6 +12,7 @@ export const HomePage = () => {
     title: "",
     desc: "",
   });
+  const [task, setTask] = useState({});
 
   // console.log(todo);
 
@@ -26,24 +27,30 @@ export const HomePage = () => {
     getTodo();
   }, []);
 
-  const handleDelete = (_id) => {
-    const deletes = todos.filter((todo) => todo._id !== _id);
-    // console.log(deltes);
-    setTodos(deletes);
-  };
   return (
     <>
       <AddTodo
         todo={todo}
         setTodo={setTodo}
         todos={todos}
+        getTodo={getTodo}
         setTodos={setTodos}
+        task={task}
+        setTask={setTask}
       />
       <div className=" container">
         <div className=" row">
           {todos.map((todo) => (
             <div className=" col-lg-4" key={todo._id}>
-              <TodoList todos={todo} handleDelete={handleDelete} />
+              <TodoList
+                todo={todo}
+                setTodo={setTodo}
+                todos={todos}
+                setTodos={setTodos}
+                getTodo={getTodo}
+                task={task}
+                setTask={setTask}
+              />
             </div>
           ))}
         </div>

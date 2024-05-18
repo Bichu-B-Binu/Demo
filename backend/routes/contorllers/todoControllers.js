@@ -16,16 +16,17 @@ const getTodo = async (req, res) => {
 };
 
 const deleteTodo = async (req, res) => {
-  await Todo.findByIdAndDelete(req.params.id);
-  res.status(200).send("Deleted");
+  const deleted = await Todo.findByIdAndDelete({ _id: req.params.id });
+  res.status(200).json(deleted);
 };
 
 const updateTodo = async (req, res) => {
+  const { _id } = req.params;
   const { title, desc } = req.body;
-  const todo = await Todo.findById(req.params.id);
-  todo.title = title || todo.title;
-  todo.desc = desc || todo.desc;
-  const updatedTodo = await todo.save();
+  const updatedTodo = await Todo.findByIdAndUpdate(
+    { _id: _id },
+    { title: title, desc: desc }
+  );
   res.json(updatedTodo);
 };
 
